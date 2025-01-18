@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Beranda - Wisata Tegal{% endblock %}
+{% block content %}
+<section id="contact" class="py-5">
+    <div class="container text-center">
+        <h3 class="mb-4">Kontak Kami</h3>
+        <div class="row justify-content-center">
+            <!-- Informasi Kontak -->
+            <div class="col-md-6 mb-4">
+                <div class="card p-4">
+                    <h5 class="card-title">Informasi Kontak</h5>
+                    <p><i class="bi bi-geo-alt-fill text-primary"></i>Kota TEGAL</p>
+                    <p><i class="bi bi-envelope-fill text-primary"></i> Email: <a href="mailto:Tegal.com">Tegal@gmail.com</a></p>
+                    <p><i class="bi bi-telephone-fill text-primary"></i> Telepon: <a href="tel:082133979919">08888888</a></p>
+                </div>
+            </div>
+
+            <!-- Formulir Kontak -->
+            <div class="col-md-6 mb-4">
+                <div class="card p-4">
+                    <h5 class="card-title">Hubungi Kami</h5>
+                    <form action="/send_message" method="post">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="name" placeholder="Nama Anda" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" name="email" placeholder="Email Anda" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" name="message" rows="4" placeholder="Pesan Anda" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+

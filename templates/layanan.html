@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Beranda - Wisata Tegal{% endblock %}
+
+{% block content %}
+<head>
+    <style>
+        .wisata img {
+            width: 100%;
+            height: auto;
+        }
+        .form-section {
+            margin-top: 40px;
+        }
+        .section-title {
+            margin-bottom: 30px;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+   <!-- Header Tegal -->
+<div class="container-fluid p-0">
+    <div class="position-relative">
+        <!-- Background Image -->
+        <img src="/static/foto/tegalll.jpeg" class="img-fluid w-100" alt="Header Tegal" style="height: 100vh; object-fit: cover;">
+        <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+            <h1 class="display-4">Selamat Datang di Wisata Tegal</h1>
+            <p class="lead">Temukan destinasi wisata yang mempesona di Tegal. Liburan Anda lebih berkesan bersama kami!</p>
+        </div>
+    </div>
+</div>
+
+    <main id="main-content">
+        <section id="home" class="page active text-center" style="font-style: italic;">
+            <h2 class="section-title">Informasi Terkini</h2>
+            <p>Temukan destinasi wisata untuk liburan Anda di Tegal yang penuh dengan keindahan alam dan budaya!</p>
+            <p>Tegal adalah kota yang terletak di pesisir utara Jawa Tengah, dikenal dengan sejarah, budaya, dan kuliner khasnya yang menggugah selera. Dengan berbagai destinasi wisata seperti Pantai Alam Indah, Guci dengan pemandian air panas alami, dan Waduk Cacaban yang menawarkan pemandangan menakjubkan, Tegal menjadi pilihan tepat untuk petualangan Anda.</p>
+        </section>
+
+        <!-- Wisata Section -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/static/foto/pai.jpg" class="card-img-top" alt="Pantai Alam Indah">
+                        <div class="card-body">
+                            <h5 class="card-title">Pantai Alam Indah</h5>
+                            <p class="card-text">Pantai yang menawarkan pemandangan alam yang indah dan suasana yang menenangkan, cocok untuk berlibur bersama keluarga atau teman.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/static/foto/Guci.jpeg" class="card-img-top" alt="Guci">
+                        <div class="card-body">
+                            <h5 class="card-title">Guci</h5>
+                            <p class="card-text">Kawasan wisata dengan sumber air panas alami yang terkenal dengan keindahan alamnya. Ideal untuk relaksasi dan menikmati alam sekitar.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/static/foto/waduk cacaban.webp" class="card-img-top" alt="Waduk Cacaban">
+                        <div class="card-body">
+                            <h5 class="card-title">Waduk Cacaban</h5>
+                            <p class="card-text">Waduk yang terkenal dengan keindahan pemandangan dan berbagai aktivitas air yang seru. Cocok untuk aktivitas outdoor dan memancing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Harga Tiket</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Nama Wisata</th>
+                            <th>Harga</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Guci</td>
+                            <td>Rp500.000</td>
+                        </tr>
+                        <tr>
+                            <td>Waduk Cacaban</td>
+                            <td>Rp450.000</td>
+                        </tr>
+                        <tr>
+                            <td>Pantai Alam Indah</td>
+                            <td>Rp475.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+        <!-- Form Pemesanan Tiket -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Pemesanan Tiket Wisata</h2>
+
+        <!-- Menampilkan Pesan Flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert alert-success">
+                    {% for category, message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="POST" action="/layanan">
+                    <div class="mb-3">
+                        <label class="form-label">Nama Lengkap</label>
+                        <input type="text" name="namalengkap" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nomor HP</label>
+                        <input type="text" name="nomerhp" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Wisata</label>
+                        <select name="wisata" class="form-control" required>
+                            <option value="Guci">Guci</option>
+                            <option value="Pantai Alam Indah">Pantai Alam Indah</option>
+                            <option value="Waduk Cacaban">Waduk Cacaban</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-2">Pesan Tiket</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    </main>
+
+    <!-- Menghubungkan dengan Bootstrap JS dan Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+</body>
+{% endblock %}

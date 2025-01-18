@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Manajemen Wisata{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+
+            <!-- Menampilkan Pesan Flash -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert alert-success">
+                    {% for category, message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+    <h1 class="mb-4">Manajemen Data Wisata Tegal</h1>
+
+    <!-- Button untuk Tambah Data -->
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addDataModal">
+        Tambah Data
+    </button>
+
+    <!-- Tabel Data -->
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Nama Lengkap</th>
+                <th>Nomor HP</th>
+                <th>Wisata</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
+                <td>
+                    <!-- Tombol Edit -->
+                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editDataModal"
+                        data-id="{{ item[0] }}" data-name="{{ item[1] }}" data-phone="{{ item[2] }}" data-tour="{{ item[3] }}">
+                        Edit
+                    </button>
+
+                    <!-- Form Delete -->
+                    <form method="POST" action="/admin" style="display:inline;">
+                        <input type="hidden" name="operation" value="delete">
+                        <input type="hidden" name="data_id" value="{{ item[0] }}">
+                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Add Data -->
+<div class="modal fade" id="addDataModal" tabindex="-1" aria-labelledby="addDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDataModalLabel">Tambah Data Wisata</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="/admin">
+                <input type="hidden" name="operation" value="add">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nama Lengkap</label>
+                        <input type="text" name="namalengkap" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nomor Hp</label>
+                        <input type="text" name="nomerhp" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Wisata</label>
+                        <select name="wisata" class="form-control" required>
+                            <option value="Guci">Guci</option>
+                            <option value="pai">Pai</option>
+                            <option value="Cacaban">Cacaban</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Data -->
+<div class="modal fade" id="editDataModal" tabindex="-1" aria-labelledby="editDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editDataModalLabel">Edit Data Wisata</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="/admin">
+                <input type="hidden" name="operation" value="edit">
+                <input type="hidden" name="data_id" id="editDataId">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nama Lengkap</label>
+                        <input type="text" name="namalengkap" id="editDataName" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nomor Hp</label>
+                        <input type="text" name="nomerhp" id="editDataPhone" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Wisata</label>
+                        <select name="wisata" id="editDataTour" class="form-control" required>
+                            <option value="Guci">Guci</option>
+                            <option value="Pai">Pai</option>
+                            <option value="Cacaban">Cacaban</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Mengisi form Edit dengan data yang dipilih
+    document.querySelectorAll('.btn-warning').forEach(button => {
+        button.addEventListener('click', function() {
+            document.getElementById('editDataId').value = this.dataset.id;
+            document.getElementById('editDataName').value = this.dataset.name;
+            document.getElementById('editDataPhone').value = this.dataset.phone;
+            document.getElementById('editDataTour').value = this.dataset.tour;
+        });
+    });
+</script>
+{% endblock %}

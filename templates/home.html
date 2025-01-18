@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Beranda - Wisata Tegal{% endblock %}
+
+{% block content %}
+<header id="home" class="text-center text-white d-flex align-items-center" style="height: 100vh; position: relative; overflow: hidden;">
+    <!-- Video Background -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+        <video autoplay muted loop style="width: 100%; height: 100%; object-fit: cover;">
+            <source src="/static/foto/pidio.mp4" type="video/mp4">
+        </video>
+    </div>
+    <!-- Text Content -->
+    <div class="container">
+        <h1 class="display-4 font-weight-bold">Selamat Datang di Wisata Tegal</h1>
+        <p class="lead">Nikmati keindahan alam Tegal dengan berbagai pilihan destinasi wisata. Mulai dari pantai, pemandian air panas, hingga waduk yang menawan, semuanya ada di sini.</p>
+        <a href="/layanan" class="btn btn-primary btn-lg mt-3">Pesan Tiket Sekarang!</a>
+    </div>
+</header>
+
+<section class="py-5 bg-light">
+    <div class="container text-center">
+        <h2 class="mb-4">Destinasi Wisata Tegal</h2>
+        <p class="lead"><marquee>Temukan keindahan alam Tegal yang menawan, dari pantai hingga pegunungan yang luar biasa.</marquee></p>
+        <div class="d-flex justify-content-center flex-wrap mt-4">
+            <!-- Card 1: Pantai Alam Indah -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="/static/foto/pai.jpg" class="card-img-top" alt="Pantai Alam Indah">
+                    <div class="card-body">
+                        <h5 class="card-title">Pantai Alam Indah</h5>
+                        <p class="card-text">Nikmati suasana pantai yang menenangkan dengan pemandangan alam yang luar biasa dan ombak yang tenang.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2: Guci -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="/static/foto/Guci.jpeg" class="card-img-top" alt="Guci">
+                    <div class="card-body">
+                        <h5 class="card-title">Guci</h5>
+                        <p class="card-text">Temukan kedamaian dan kesejukan di Guci, tempat pemandian air panas alami yang memanjakan tubuh dan pikiran.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3: Waduk Cacaban -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="/static/foto/waduk cacaban.webp" class="card-img-top" alt="Waduk Cacaban">
+                    <div class="card-body">
+                        <h5 class="card-title">Waduk Cacaban</h5>
+                        <p class="card-text">Nikmati keindahan alam Waduk Cacaban dengan pemandangan yang menenangkan dan aktivitas air yang seru.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
